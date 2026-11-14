@@ -1,0 +1,32 @@
+# Archivos compilados y generados
+target/
+build/
+*.class
+
+# Archivos locales y de IDE
+.idea/
+.vscode/
+*.iml
+.settings/
+.project
+.classpath
+nbproject/
+nb-configuration.xml
+nbactions.xml
+
+# Base de datos local H2
+data/
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Secretos y configuración local
+.env
+application-local.properties
+
+# Dependencias de Node (si se usa newman localmente)
+node_modules/
+
+# Archivos temporales de Windows
+Thumbs.db
+desktop.ini

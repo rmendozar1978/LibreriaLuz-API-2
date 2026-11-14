@@ -1,0 +1,64 @@
+==========================================================================
+PROYECTO: Librería Luz - API REST
+EVIDENCIA: GA7-220501096-AA5-EV04 - API del proyecto
+APRENDIZ: Juan Sebastián Ávila Patiño
+FICHA: ADSO 3235898
+PROGRAMA: Tecnólogo en Análisis y Desarrollo de Software - SENA
+==========================================================================
+
+URL BASE: http://localhost:9090
+DOCUMENTACIÓN INTERACTIVA (Swagger UI): http://localhost:9090/swagger-ui.html
+ESPECIFICACIÓN OpenAPI (JSON): http://localhost:9090/v3/api-docs
+FORMATO: JSON (Content-Type: application/json)
+
+--------------------------------------------------------------------------
+AUTENTICACIÓN
+--------------------------------------------------------------------------
+1. POST   /api/auth/registro       Registrar usuario
+          Body: {"nombre","correo","contrasena"}
+          Respuestas: 201 Created | 400 Bad Request | 409 Conflict
+
+2. POST   /api/auth/login          Iniciar sesión
+          Body: {"correo","contrasena"}
+          Respuestas: 200 OK | 400 Bad Request | 401 Unauthorized
+
+--------------------------------------------------------------------------
+USUARIOS
+--------------------------------------------------------------------------
+3. GET    /api/usuarios            Listar usuarios                 200
+4. GET    /api/usuarios/{id}       Consultar usuario               200 | 404
+5. DELETE /api/usuarios/{id}       Eliminar usuario                200 | 404 | 409
+
+--------------------------------------------------------------------------
+CATEGORÍAS
+--------------------------------------------------------------------------
+6.  GET    /api/categorias         Listar categorías               200
+7.  GET    /api/categorias/{id}    Consultar categoría             200 | 404
+8.  POST   /api/categorias         Crear categoría                 201 | 400 | 409
+          Body: {"nombre","descripcion"}
+9.  PUT    /api/categorias/{id}    Actualizar categoría            200 | 400 | 404 | 409
+10. DELETE /api/categorias/{id}    Eliminar categoría              200 | 404 | 409
+
+--------------------------------------------------------------------------
+LIBROS
+--------------------------------------------------------------------------
+11. GET    /api/libros             Listar / buscar libros          200
+          Parámetros opcionales: ?buscar=texto  ?categoriaId=1
+12. GET    /api/libros/{id}        Consultar libro                 200 | 404
+13. POST   /api/libros             Crear libro                     201 | 400 | 404 | 409
+          Body: {"titulo","autor","isbn","precio","stock","categoriaId"}
+14. PUT    /api/libros/{id}        Actualizar libro                200 | 400 | 404 | 409
+15. DELETE /api/libros/{id}        Eliminar libro                  200 | 404 | 409
+
+--------------------------------------------------------------------------
+VENTAS
+--------------------------------------------------------------------------
+16. POST   /api/ventas             Registrar venta                 201 | 400 | 404 | 409
+          Body: {"usuarioId", "items":[{"libroId","cantidad"}]}
+17. GET    /api/ventas             Listar ventas                   200 | 404
+          Parámetro opcional: ?usuarioId=1
+18. GET    /api/ventas/{id}        Consultar venta                 200 | 404
+
+--------------------------------------------------------------------------
+Errores: todas las respuestas de error tienen la forma {"mensaje": "..."}
+Colección Postman: postman/LibreriaLuz-API.postman_collection.json

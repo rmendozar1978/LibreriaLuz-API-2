@@ -1,0 +1,15 @@
+Evidencias: GA7-220501096-AA5-EV03 — Diseño y desarrollo de servicios web - proyecto
+            GA7-220501096-AA5-EV04 — API del proyecto
+
+Aprendiz: Juan Sebastián Ávila Patiño
+
+Ficha: ADSO 3235898
+
+Programa: Tecnólogo en Análisis y Desarrollo de Software
+
+Proyecto: Librería Luz - API REST
+
+URL del repositorio: https://github.com/juanavip/LibreriaLuz-API
+
+(El repositorio se publica con: git remote add origin https://github.com/juanavip/LibreriaLuz-API.git
+ y git push -u origin main, después de crearlo vacío en GitHub con el nombre LibreriaLuz-API.)

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librería Luz - Sistema Integrado de Gestión</title>
+  <!-- Materialize CSS e Iconos de Google -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="grey lighten-4">
+
+  <!-- Barra de Navegación -->
+  <nav class="indigo darken-3">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo"><i class="material-icons left">local_library</i>Librería Luz</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#sec-catalogo">Catálogo</a></li>
+        <li><a href="#sec-pedidos">Pedidos</a></li>
+        <li id="nav-user-info" class="hide"><span class="chip white indigo-text" id="lbl-usuario"></span></li>
+        <li id="nav-btn-logout" class="hide"><a href="#" id="btn-logout"><i class="material-icons">exit_to_app</i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container section">
+    <!-- SECCIÓN 1: AUTENTICACIÓN (LOGIN / REGISTRO) -->
+    <section id="sec-auth" class="row">
+      <div class="col s12 m6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title indigo-text text-darken-3">Iniciar Sesión</span>
+            <form id="form-login">
+              <div class="input-field">
+                <input id="login-email" type="email" required>
+                <label for="login-email">Correo Electrónico</label>
+              </div>
+              <div class="input-field">
+                <input id="login-password" type="password" required>
+                <label for="login-password">Contraseña</label>
+              </div>
+              <button class="btn waves-effect waves-light indigo darken-2" type="submit">
+                Ingresar <i class="material-icons right">login</i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m6">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title teal-text text-darken-2">Registro de Usuario</span>
+            <form id="form-register">
+              <div class="input-field">
+                <input id="reg-nombre" type="text" required>
+                <label for="reg-nombre">Nombre Completo</label>
+              </div>
+              <div class="input-field">
+                <input id="reg-email" type="email" required>
+                <label for="reg-email">Correo Electrónico</label>
+              </div>
+              <div class="input-field">
+                <input id="reg-password" type="password" minlength="6" required>
+                <label for="reg-password">Contraseña (mín. 6 caracteres)</label>
+              </div>
+              <div class="input-field">
+                <select id="reg-rol" class="browser-default">
+                  <option value="cliente" selected>Rol: Cliente</option>
+                  <option value="admin">Rol: Administrador</option>
+                </select>
+              </div>
+              <button class="btn waves-effect waves-light teal darken-2" type="submit">
+                Registrar <i class="material-icons right">person_add</i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: GESTIÓN DE CATÁLOGO DE LIBROS (CRUD) -->
+    <section id="sec-catalogo" class="row">
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title indigo-text text-darken-3" id="titulo-form-libro">Registrar Libro</span>
+            <form id="form-libro">
+              <input type="hidden" id="libro-id">
+              <div class="input-field">
+                <input id="libro-isbn" type="text" placeholder="Ej. 978-958-0001" required>
+                <label class="active" for="libro-isbn">ISBN</label>
+              </div>
+              <div class="input-field">
+                <input id="libro-titulo" type="text" placeholder="Título de la obra" required>
+                <label class="active" for="libro-titulo">Título</label>
+              </div>
+              <div class="input-field">
+                <input id="libro-autor" type="text" placeholder="Autor" required>
+                <label class="active" for="libro-autor">Autor</label>
+              </div>
+              <div class="input-field">
+                <input id="libro-precio" type="number" min="0" placeholder="Precio COP" required>
+                <label class="active" for="libro-precio">Precio ($)</label>
+              </div>
+              <div class="input-field">
+                <input id="libro-stock" type="number" min="0" placeholder="Unidades disponibles" required>
+                <label class="active" for="libro-stock">Stock</label>
+              </div>
+              <button class="btn indigo darken-2" type="submit">Guardar</button>
+              <button class="btn grey" type="button" id="btn-limpiar-libro">Limpiar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m8">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Catálogo Disponible</span>
+            <table class="striped responsive-table">
+              <thead>
+                <tr>
+                  <th>ISBN</th>
+                  <th>Título</th>
+                  <th>Autor</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-libros"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: GESTIÓN DE PEDIDOS / VENTAS -->
+    <section id="sec-pedidos" class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title indigo-text text-darken-3">Historial de Pedidos y Ventas</span>
+            <table class="highlight responsive-table">
+              <thead>
+                <tr>
+                  <th>ID Pedido</th>
+                  <th>Cliente</th>
+                  <th>Detalle de Libros</th>
+                  <th>Total Pagado</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-pedidos"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/services/api.service.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
